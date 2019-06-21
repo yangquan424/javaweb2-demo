@@ -1,8 +1,9 @@
 package com.cheer.mybatis.model;
 
+import java.io.Serializable;
 import java.util.StringJoiner;
 
-public class Exam {
+public class Exam implements Serializable {
     private int id;
     private String question;
     private String A;

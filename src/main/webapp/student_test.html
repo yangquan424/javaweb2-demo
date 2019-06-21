@@ -8,7 +8,6 @@
             max-width: 800px;
             min-width: 480px;
             margin: 0 auto;
-
         }
 
         #d1 {
@@ -73,14 +72,21 @@
             success: function (response) {
 
                 f(response, i);
-
                 $("#b1").click(function () {
                     i -= 1;
+                    $("#b2").removeAttr("disabled");
+                    if (i <= 0) {
+                        $("#b1").attr("disabled", "disabled");
+                    }
                     f(response, i);
                     return i;
                 });
                 $("#b2").click(function () {
                     i += 1;
+                    $("#b1").removeAttr("disabled");
+                    if (i === response.length - 1) {
+                        $("#b2").attr("disabled", "disabled");
+                    }
                     f(response, i);
                     return i;
                 });
@@ -102,7 +108,6 @@
                     });
                 });
             }
-
         });
 
         function f(response, i) {
@@ -114,15 +119,36 @@
             if (!f1(i)) {
                 arr[i] = null;
             }
+            f2(i);
         }
 
         function f1(i) {
             $("input[type='radio']").click(function () {
                 if ($(this).prop("checked")) {
                     arr[i] = $("input[name='answer']:checked").val();
+
                 }
             });
             return arr[i];
+        }
+
+        /**
+         * 数组判断该题被选择
+         * 循环四个选项
+         * 如果某个选项等于该数组所在位置的值
+         * 设置该选项为默认选项，并关闭该题的所有选项
+         * @param i
+         */
+        function f2(i) {
+            if(arr[i] !==null|| arr[i] !==""){
+                $.each($("input[type='radio']"),function () {
+                    if(arr[i] === $(this).attr("value")){
+                        $(this).attr("checked","checked");
+                        $("input[type='radio']").attr("disabled","disabled");
+                        return;
+                    }
+                });
+            }
         }
 
     });

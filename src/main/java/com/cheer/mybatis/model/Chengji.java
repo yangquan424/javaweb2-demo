@@ -1,16 +1,19 @@
 package com.cheer.mybatis.model;
 
+import java.io.Serializable;
 import java.util.StringJoiner;
 
-public class Chengji {
+public class Chengji implements Serializable {
     private int id;
+    //private String username;
+    //private String Password;
     private int correct;
     private int error;
     private int miss;
     private int scores;
     private String pass;
 
-    public Chengji(int id, int correct, int error, int miss, int scores, String pass) {
+    public Chengji(int id,int correct, int error, int miss, int scores, String pass) {
         this.id = id;
         this.correct = correct;
         this.error = error;
@@ -18,7 +21,9 @@ public class Chengji {
         this.scores = scores;
         this.pass = pass;
     }
-    public Chengji(){}
+
+    public Chengji() {
+    }
 
     public int getId() {
         return id;
@@ -27,6 +32,22 @@ public class Chengji {
     public void setId(int id) {
         this.id = id;
     }
+   /* public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }*/
+
 
     public int getCorrect() {
         return correct;
