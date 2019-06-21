@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #form{
+            margin: 0 auto;
+            position: relative;
+            top: 100px;
+            width: 500px;
+            height: 100px;
+        }
+        h1{
+            margin: 0 auto;
+            position: relative;
+            top: 100px;
+            width: 500px;
+            height: 200px;
+        }
+        button {
+            position: relative;
+            left: 50px;
+            width: 120px;
+            height: 30px;
+            border-radius: 12px;
+            border-width: 0;
+            color: white;
+            margin-right:100px;
+            background-color: rgba(22, 155, 213, 1);
+        }
+
+
+    </style>
+</head>
+<body>
+
+<h1>江苏2018年小客车科目四考试</h1>
+<div id="form">
+        <div class="row">
+            <button class="submit" id="b1">管理员登录</button>
+            <button class="submit" id="b2">考生登录</button>
+        </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<script>
+    $(function () {
+        $("#b1").click(function () {
+            window.location.href="admin.html";
+        });
+        $("#b2").click(function () {
+            window.location.href="student.html";
+        });
+    });
+</script>
+</body>
+</html>

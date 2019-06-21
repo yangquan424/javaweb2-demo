@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace就是接口类-->
+<mapper namespace="com.cheer.mybatis.dao.UsersMapper">
+    <cache></cache>
+    <insert id="register">
+        insert into users values(#{username},#{password})
+    </insert>
+    <select id="getlist" resultType="Users" useCache="true">
+        select * from users where username = #{username}
+    </select>
+</mapper>

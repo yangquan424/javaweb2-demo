@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员操作页面</title>
+
+    <style>
+        body {
+            max-width: 800px;
+            min-width: 480px;
+            margin: 0 auto;
+
+        }
+
+        table.imagetable {
+            /*font-family: verdana,arial,sans-serif;*/
+            width: 800px;
+            font-size: 11px;
+            color: #333333;
+            border-width: 1px;
+            border-color: #999999;
+            border-collapse: collapse;
+            margin-top: 100px;
+        }
+
+        table.imagetable th {
+            background: #b5cfd2;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #999999;
+        }
+
+        table.imagetable td {
+            background: white;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #999999;
+        }
+
+        button#b1 {
+            position: relative;
+            top: 20px;
+            width: 120px;
+            height: 30px;
+            border-radius: 12px;
+            border-width: 0;
+            margin-right: 88px;
+            color: white;
+            background-color: rgba(22, 155, 213, 1);
+        }
+    </style>
+</head>
+<body>
+<form action="servlet/UploadServlet" method="post" enctype="multipart/form-data">
+    <button class="submit" id="b1">考试题目导入</button>
+    <label for="avatar">Excel</label><input type="file" name="avatar" id="avatar">
+</form>
+<table class="imagetable">
+
+    <tr>
+        <th>序号</th>
+        <th>题干</th>
+        <th>题目内容</th>
+        <th>编辑</th>
+        <th>删除</th>
+    </tr>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    $(function () {
+        let arr = ["id","question"];
+
+        $("#b1").click(function () {
+            if($("#avatar").val() == ""||$("#avatar").val()==null){
+                alert("未选择文件");
+            }
+        });
+        $.ajax({
+            url: "servlet/Page_adminServlet",
+            dataType: "json",
+            method: "GET",
+            success: function (response) {
+                $.each(response,function (index,value1) {
+                    let $tr = $("<tr></tr>");
+                    $("table").append($tr);
+                    let $td;
+                    let $ta = $("<td><a href=''>详细内容</a></td>");
+                    let $tb = $("<td><a href=''>编辑</a></td>");
+                    let $tc = $("<td><a href=''>删除</a></td>");
+                    $.each(arr,function (index,value) {
+                        let data = value1[value];
+                        $td = $("<td>"+ data +"</td>");
+                        $tr.append($td);
+                    });
+                    $tr.append($ta);
+                    $tr.append($tb);
+                    $tr.append($tc);
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

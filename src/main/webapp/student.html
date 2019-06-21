@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学员登录页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #form{
+            margin: 0 auto;
+            position: relative;
+            top: 50px;
+            width: 500px;
+            height: 100px;
+        }
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+        input {
+            width: 250px;
+            height: 30px;
+        }
+        button {
+            position: relative;
+            left: 108px;
+            top: 20px;
+            width: 80px;
+            height: 30px;
+            border-radius: 12px;
+            border-width: 0;
+            margin-right:88px;
+            color: white;
+            background-color: rgba(22, 155, 213, 1);
+        }
+        h1{
+            margin: 0 auto;
+            position: relative;
+            top: 100px;
+            width: 500px;
+            height: 200px;
+        }
+
+
+    </style>
+</head>
+<body>
+<h1>江苏2018年小客车科目四考试</h1>
+<div id="form">
+    <form action="servlet/StudentServlet" method="post">
+        <div class="row">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username">
+        </div>
+        <div class="row">
+            <label for="password">Password</label>
+            <input type="password" name="psaaword" id="password">
+        </div>
+        <div class="row">
+            <button class="submit" id="b1">重置</button>
+            <button class="submit" id="b2">登录</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<script>
+    $(function () {
+        $("#b1").click(function () {
+            window.location.href="student.html";
+        });
+
+        $("#b2").click(function () {
+            let result = $("#username").val();
+            let password = $("#password").val();
+            if(result == "" ){
+                alert("用户名不能为空");
+                return false;
+            }
+            if(password == "" ){
+                alert("密码不能为空");
+                return false;
+            }else{
+                return true;
+            }
+        });
+    });
+    </script>
+</body>
+</html>

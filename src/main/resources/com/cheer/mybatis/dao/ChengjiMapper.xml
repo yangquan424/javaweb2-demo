@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace就是接口类-->
+<mapper namespace="com.cheer.mybatis.dao.ChengjiMapper">
+
+    <insert id="insert">
+        insert into chengji(id) values(#{id})
+    </insert>
+    <update id="update">
+        update chengji set id=#{id},correct=#{correct},error=#{error},
+        miss=#{miss},scores=#{scores},pass=#{pass}
+        where id = #{id}
+    </update>
+    <select id="getlist" resultType="com.cheer.mybatis.model.Chengji">
+        select * from chengji where id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace就是接口类-->
+<mapper namespace="com.cheer.mybatis.dao.ExamMapper">
+    <cache></cache>
+    <insert id="insert">
+        insert into exam values(default,#{question},#{A},#{B},#{C},#{D},#{answer})
+    </insert>
+    <select id="getExam" resultType="com.cheer.mybatis.model.Exam">
+        select * from exam;
+    </select>
+    <select id="getanswer" resultType="com.cheer.mybatis.model.Exam">
+        select * from exam where id = #{id}
+    </select>
+    <select id="getkey" resultType="java.lang.String">
+        select answer from exam;
+    </select>
+</mapper>

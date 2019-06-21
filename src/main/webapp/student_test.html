@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>考生考试页面</title>
+    <style>
+        body {
+            max-width: 800px;
+            min-width: 480px;
+            margin: 0 auto;
+
+        }
+
+        #d1 {
+
+        }
+
+        button {
+            position: relative;
+            top: 20px;
+            width: 120px;
+            height: 30px;
+            border-radius: 12px;
+            border-width: 0;
+            margin-right: 88px;
+            background-color: rgba(22, 155, 213, 1);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div id="d1">
+    <div id="question">
+
+
+    </div>
+    <div id="A">
+
+    </div>
+    <div id="B">
+
+    </div>
+    <div id="C">
+
+    </div>
+    <div id="D">
+
+    </div>
+</div>
+
+<div>
+    <button class="subimt" id="b1">上一题</button>
+    <button class="subimt" id="b2">下一题</button>
+    <button class="subimt" id="b3">交卷</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    let i = 0;
+    $(function () {
+        let arr = [];
+        $.ajax({
+            url: "servlet/Page_adminServlet",
+            dataType: "json",
+            //async: false,
+            // data: {
+            //     "num": i + 1,
+            // },
+            method: "GET",
+            //type: "post",
+            //traditional: true,
+            success: function (response) {
+
+                f(response, i);
+
+                $("#b1").click(function () {
+                    i -= 1;
+                    f(response, i);
+                    return i;
+                });
+                $("#b2").click(function () {
+                    i += 1;
+                    f(response, i);
+                    return i;
+                });
+                $("#b3").click(function () {
+                    $.ajax({
+                        url: "servlet/RewindServlet",
+                        data: {
+                            "answerK": arr,
+                        },
+                        async: false,
+                        dataType: "json",
+                        type: "post",
+                        traditional: true,
+                        success: function (row) {
+                            if (row != null) {
+                                window.location.href = "student_result.html";
+                            }
+                        }
+                    });
+                });
+            }
+
+        });
+
+        function f(response, i) {
+            $("#question").html("<h3>" + response[i].id + "." + response[i].question + "</h3>");
+            $("#A").html("<input id='i1' type=\"radio\" name=\"answer\" value=\"A\">" + response[i].A);
+            $("#B").html("<input id='i2' type=\"radio\" name=\"answer\" value=\"B\">" + response[i].B);
+            $("#C").html("<input id='i3' type=\"radio\" name=\"answer\" value=\"C\">" + response[i].C);
+            $("#D").html("<input id='i4' type=\"radio\" name=\"answer\" value=\"D\">" + response[i].D);
+            if (!f1(i)) {
+                arr[i] = null;
+            }
+        }
+
+        function f1(i) {
+            $("input[type='radio']").click(function () {
+                if ($(this).prop("checked")) {
+                    arr[i] = $("input[name='answer']:checked").val();
+                }
+            });
+            return arr[i];
+        }
+
+    });
+</script>
+</body>
+</html>
